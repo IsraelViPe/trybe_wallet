@@ -1,4 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { addEmail } from '../redux/actions';
 
 class Login extends React.Component {
   state = {
@@ -12,13 +15,23 @@ class Login extends React.Component {
     });
   };
 
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const { history, dispatch } = this.props;
+    const { emailLocal } = this.state;
+    dispatch(addEmail(emailLocal));
+    history.push('/carteira');
+  };
+
   render() {
     const { emailLocal, passwordLocal } = this.state;
     const emailValidateRegex = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/;
     const minEnterPassword = 6;
     return (
       <div>
-        <form>
+        <form
+          onSubmit={ this.handleSubmit }
+        >
           <input
             onChange={ this.handleChange }
             data-testid="email-input"
@@ -48,4 +61,11 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+Login.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};
+
+export default connect()(Login);
