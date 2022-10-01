@@ -1,6 +1,10 @@
 export const ADD_EMAIL = 'ADD_EMAIL';
+
 export const RECEIVED_CURRENCIES = 'RECEIVED_CURRENCIES';
-export const LOAD_CURRECIES_ERROR = 'LOAD_CURRECIES_ERROR';
+export const LOAD_CURRENCIES_ERROR = 'LOAD_CURRENCIES_ERROR';
+
+export const ADD_EXPENSE = 'ADD_EXPENSE';
+export const LOAD_EXCHANGE_ERROR = 'LOAD_EXCHANGE_ERROR';
 
 export const addEmail = (email) => ({
   type: ADD_EMAIL,
@@ -17,6 +21,17 @@ export const loadCurrenciesError = (error) => ({
   error,
 });
 
+export const addExpense = (payload, exchangeRates) => ({
+  type: ADD_EXPENSE,
+  payload,
+  exchangeRates,
+});
+
+export const loadExchageError = (error) => ({
+  type: LOAD_EXCHANGE_ERROR,
+  error,
+});
+
 export function fetchCurrencies() {
   return async (dispatch) => {
     try {
@@ -25,6 +40,18 @@ export function fetchCurrencies() {
       dispatch(receivedCurrencies(currencies));
     } catch (error) {
       dispatch(loadCurrenciesError(error));
+    }
+  };
+}
+
+export function fetchExchenge(payload) {
+  return async (dispatch) => {
+    try {
+      const response = await fetch('https://economia.awesomeapi.com.br/json/all');
+      const exchange = await response.json();
+      dispatch(addExpense(payload, exchange));
+    } catch (error) {
+      dispatch(loadExchageError(error));
     }
   };
 }

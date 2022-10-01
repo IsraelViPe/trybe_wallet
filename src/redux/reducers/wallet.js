@@ -1,4 +1,8 @@
-import { RECEIVED_CURRENCIES, LOAD_CURRECIES_ERROR } from '../actions';
+import {
+  RECEIVED_CURRENCIES,
+  LOAD_CURRENCIES_ERROR,
+  ADD_EXPENSE,
+  LOAD_EXCHANGE_ERROR } from '../actions';
 
 const INITIAL_STATE = {
   currencies: [], // array de string
@@ -15,9 +19,21 @@ const wallet = (state = INITIAL_STATE, action) => {
       currencies: Object.keys(action.currencies)
         .filter((currencie) => currencie !== 'USDT'),
     };
-  case LOAD_CURRECIES_ERROR:
+  case LOAD_CURRENCIES_ERROR:
     return {
       ...state, currenciesError: action.error,
+    };
+  case ADD_EXPENSE:
+    return {
+      ...state,
+      expenses: [...state.expenses,
+        { id: state.expenses.length,
+          ...action.payload,
+          exchangeRates: action.exchangeRates }],
+    };
+  case LOAD_EXCHANGE_ERROR:
+    return {
+      ...state, exchangeRatesError: action.error,
     };
   default:
     return state;
