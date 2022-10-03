@@ -1,5 +1,6 @@
 import React from 'react';
-import { screen } from '@testing-library/react';
+import { screen, act } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { renderWithRouterAndRedux } from './helpers/renderWith';
 import App from '../App';
 
@@ -17,6 +18,25 @@ describe('testa tela de Login', () => {
     const button = screen.getByRole('button', {
       name: /entrar/i,
     });
+    const inputEmail = screen.getByRole('textbox');
+    const inputPassword = screen.getByPlaceholderText(/senha/i);
     expect(button).toBeDisabled();
+    userEvent.type(inputEmail, 'teste@email.com');
+    userEvent.type(inputPassword, '123456');
+    expect(button).toBeEnabled();
+  });
+  it('verifica se ao clicar no botão é redirecionado para a rota "/carteira"', () => {
+    const { history } = renderWithRouterAndRedux(<App />);
+    const { location: { pathname } } = history;
+    expect(pathname).toBe('/');
+    const button = screen.getByRole('button', {
+      name: /entrar/i,
+    });
+    const inputEmail = screen.getByRole('textbox');
+    const inputPassword = screen.getByPlaceholderText(/senha/i);
+    userEvent.type(inputEmail, 'teste@email.com');
+    userEvent.type(inputPassword, '123456');
+    userEvent.click(button);
+    expect(screen.getByText(/despesa total:/i)).toBeInTheDocument();
   });
 });
