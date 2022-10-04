@@ -2,7 +2,8 @@ import {
   RECEIVED_CURRENCIES,
   LOAD_CURRENCIES_ERROR,
   ADD_EXPENSE,
-  LOAD_EXCHANGE_ERROR } from '../actions';
+  LOAD_EXCHANGE_ERROR,
+  DEL_EXPENSE } from '../actions';
 
 const INITIAL_STATE = {
   currencies: [], // array de string
@@ -34,6 +35,12 @@ const wallet = (state = INITIAL_STATE, action) => {
   case LOAD_EXCHANGE_ERROR:
     return {
       ...state, exchangeRatesError: action.error,
+    };
+  case DEL_EXPENSE:
+    return {
+      ...state,
+      expenses: state.expenses
+        .filter((element) => element.id !== Number(action.id)),
     };
   default:
     return state;

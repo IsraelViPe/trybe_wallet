@@ -6,6 +6,8 @@ export const LOAD_CURRENCIES_ERROR = 'LOAD_CURRENCIES_ERROR';
 export const ADD_EXPENSE = 'ADD_EXPENSE';
 export const LOAD_EXCHANGE_ERROR = 'LOAD_EXCHANGE_ERROR';
 
+export const DEL_EXPENSE = 'DEL_EXPENSE';
+
 export const addEmail = (email) => ({
   type: ADD_EMAIL,
   email,
@@ -30,6 +32,11 @@ export const addExpense = (payload, exchangeRates) => ({
 export const loadExchageError = (error) => ({
   type: LOAD_EXCHANGE_ERROR,
   error,
+});
+
+export const delExpense = (id) => ({
+  type: DEL_EXPENSE,
+  id,
 });
 
 export function fetchCurrencies() {
