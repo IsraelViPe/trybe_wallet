@@ -16,7 +16,6 @@ class Table extends Component {
 
   render() {
     const { expenses } = this.props;
-    console.log(expenses);
     return (
       <div>
         <table>
@@ -78,7 +77,7 @@ class Table extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  expenses: state.wallet.expenses,
+  ...state.wallet,
 });
 
 Table.propTypes = {

@@ -3,16 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchExchenge, addExpense, submitEdition } from '../redux/actions';
 
-// questão 9 eu utilizarei o walletForm tudo se baseara em um if/else para determinar se a tela é
-// de adição ou de edição////
-// baby steps >>> se eu clico no botão de editar a chave editor se torna true e o idToEdit recebe o id da
-// expense clicada
-// ai eu faço uma lógica que altera toda pagina com renderização condicional
-// troco o nome do botão e troco também a lógica do click
-// a logica do clique tera um ramo para adição que ja está implementado e um ramo para a edição
-// no ramo para edição eu preciso que quando o botão seja clicado o estado local seja armazedo em
-// um objeto o payload e ai eu chamo a função fetch normal
-
 class WalletForm extends Component {
   state = {
     value: '',
@@ -47,11 +37,9 @@ class WalletForm extends Component {
   handleClick = () => {
     const { addExpenseProp, editMode, idToEdit, expenses, submitEditionAct } = this.props;
     if (editMode) {
-      console.log(idToEdit);
       const payload = { id: idToEdit,
         ...this.state,
         exchangeRates: expenses[idToEdit].exchangeRates };
-      console.log(payload);
       expenses.splice(idToEdit, 1, payload);
       submitEditionAct(expenses);
     } else {
@@ -67,7 +55,7 @@ class WalletForm extends Component {
   };
 
   render() {
-    const { currenciesList, editMode, expenses, idToEdit } = this.props;
+    const { currenciesList, editMode } = this.props;
     const { value, description } = this.state;
     return (
       <div>
@@ -168,6 +156,17 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 WalletForm.propTypes = {
+  expenses: PropTypes.arrayOf(PropTypes.shape({
+    currency: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    tag: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired,
+    exchangeRates: PropTypes.objectOf(PropTypes.objectOf(PropTypes.string)).isRequired,
+  })).isRequired,
+  submitEditionAct: PropTypes.func.isRequired,
+  idToEdit: PropTypes.number.isRequired,
+  editMode: PropTypes.bool.isRequired,
   currenciesList: PropTypes.arrayOf(PropTypes.string).isRequired,
   addExpenseProp: PropTypes.func.isRequired,
 };

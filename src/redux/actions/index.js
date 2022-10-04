@@ -10,6 +10,11 @@ export const DEL_EXPENSE = 'DEL_EXPENSE';
 export const EDIT_EXPENSE_MODE = 'EDIT_EXPENSE_MODE';
 export const SUBMIT_EDITION = 'SUBMIT_EDITION';
 
+export const submitEdition = (payload) => ({
+  type: SUBMIT_EDITION,
+  payload,
+});
+
 export const addEmail = (email) => ({
   type: ADD_EMAIL,
   email,
@@ -44,11 +49,6 @@ export const delExpense = (id) => ({
 export const editExpenseMode = (idToEdit) => ({
   type: EDIT_EXPENSE_MODE,
   idToEdit,
-});
-
-export const submitEdition = (payload) => ({
-  type: SUBMIT_EDITION,
-  payload,
 });
 
 export function fetchCurrencies() {
