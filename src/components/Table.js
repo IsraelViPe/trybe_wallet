@@ -10,8 +10,9 @@ class Table extends Component {
   };
 
   handleClickEditMode = ({ target: { id } }) => {
-    const { dispatch } = this.props;
-    dispatch(editExpenseMode(id));
+    const { dispatch, expenses } = this.props;
+    const recoverInfo = expenses[id];
+    dispatch(editExpenseMode(id, recoverInfo));
   };
 
   render() {

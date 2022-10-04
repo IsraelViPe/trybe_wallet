@@ -46,7 +46,10 @@ const wallet = (state = INITIAL_STATE, action) => {
     };
   case EDIT_EXPENSE_MODE:
     return {
-      ...state, editor: true, idToEdit: action.idToEdit,
+      ...state,
+      editor: true,
+      idToEdit: action.idToEdit,
+      recoverInfosForEdition: action.recoverInfos,
     };
   case SUBMIT_EDITION:
     return {

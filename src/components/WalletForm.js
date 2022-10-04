@@ -13,21 +13,6 @@ class WalletForm extends Component {
 
   };
 
-  // recoverInfoForEdition = () => {
-  //   const { editMode, idToEdit, expenses } = this.props;
-  //   if (editMode) {
-  //     const { value, description, currency, method, tag } = expenses[idToEdit];
-  //     console.log(editMode);
-  //     this.setState({
-  //       value,
-  //       description,
-  //       currency,
-  //       method,
-  //       tag,
-  //     });
-  //   }
-  // };
-
   handleChange = ({ target: { value, name } }) => {
     this.setState({
       [name]: value,
@@ -35,7 +20,8 @@ class WalletForm extends Component {
   };
 
   handleClick = () => {
-    const { addExpenseProp, editMode, idToEdit, expenses, submitEditionAct } = this.props;
+    const { addExpenseProp, editMode,
+      idToEdit, expenses, submitEditionAct } = this.props;
     if (editMode) {
       const payload = { id: idToEdit,
         ...this.state,
@@ -148,6 +134,7 @@ const mapStateToProps = (state) => ({
   editMode: state.wallet.editor,
   idToEdit: Number(state.wallet.idToEdit),
   expenses: state.wallet.expenses,
+  recoverInfo: state.wallet.recoverInfosForEdition,
 });
 
 const mapDispatchToProps = (dispatch) => ({
