@@ -7,6 +7,8 @@ export const ADD_EXPENSE = 'ADD_EXPENSE';
 export const LOAD_EXCHANGE_ERROR = 'LOAD_EXCHANGE_ERROR';
 
 export const DEL_EXPENSE = 'DEL_EXPENSE';
+export const EDIT_EXPENSE_MODE = 'EDIT_EXPENSE_MODE';
+export const SUBMIT_EDITION = 'SUBMIT_EDITION';
 
 export const addEmail = (email) => ({
   type: ADD_EMAIL,
@@ -39,6 +41,16 @@ export const delExpense = (id) => ({
   id,
 });
 
+export const editExpenseMode = (idToEdit) => ({
+  type: EDIT_EXPENSE_MODE,
+  idToEdit,
+});
+
+export const submitEdition = (payload) => ({
+  type: SUBMIT_EDITION,
+  payload,
+});
+
 export function fetchCurrencies() {
   return async (dispatch) => {
     try {
@@ -51,12 +63,12 @@ export function fetchCurrencies() {
   };
 }
 
-export function fetchExchenge(payload) {
+export function fetchExchenge(payload, actionCreator) {
   return async (dispatch) => {
     try {
       const response = await fetch('https://economia.awesomeapi.com.br/json/all');
       const exchange = await response.json();
-      dispatch(addExpense(payload, exchange));
+      dispatch(actionCreator(payload, exchange));
     } catch (error) {
       dispatch(loadExchageError(error));
     }

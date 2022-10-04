@@ -3,7 +3,9 @@ import {
   LOAD_CURRENCIES_ERROR,
   ADD_EXPENSE,
   LOAD_EXCHANGE_ERROR,
-  DEL_EXPENSE } from '../actions';
+  DEL_EXPENSE,
+  EDIT_EXPENSE_MODE,
+  SUBMIT_EDITION } from '../actions';
 
 const INITIAL_STATE = {
   currencies: [], // array de string
@@ -41,6 +43,16 @@ const wallet = (state = INITIAL_STATE, action) => {
       ...state,
       expenses: state.expenses
         .filter((element) => element.id !== Number(action.id)),
+    };
+  case EDIT_EXPENSE_MODE:
+    return {
+      ...state, editor: true, idToEdit: action.idToEdit,
+    };
+  case SUBMIT_EDITION:
+    return {
+      ...state,
+      expenses: action.payload,
+      editor: false,
     };
   default:
     return state;
