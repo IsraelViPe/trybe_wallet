@@ -42,8 +42,7 @@ const wallet = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       editor: false,
-      expenses: state.expenses
-        .filter((element) => element.id !== Number(action.id)),
+      expenses: action.payload,
     };
   case EDIT_EXPENSE_MODE:
     return {

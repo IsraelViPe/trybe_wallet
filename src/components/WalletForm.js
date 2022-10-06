@@ -29,13 +29,13 @@ class WalletForm extends Component {
         exchangeRates: expenses[idToEdit].exchangeRates };
       expenses.splice(idToEdit, 1, payload);
       submitEditionAct(expenses);
-      this.setState({
+      this.setState((prevState) => ({
         value: '',
         description: '',
-        currency: 'USD',
-        method: 'Dinheiro',
-        tag: 'Alimentação',
-      });
+        currency: prevState.currency,
+        method: prevState.method,
+        tag: prevState.tag,
+      }));
     } else {
       addExpenseProp({ ...this.state }, addExpense);
       this.setState((prevState) => ({

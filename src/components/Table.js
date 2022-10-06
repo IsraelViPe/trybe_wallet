@@ -5,8 +5,12 @@ import { delExpense, editExpenseMode } from '../redux/actions';
 
 class Table extends Component {
   handleClick = ({ target: { id } }) => {
-    const { dispatch } = this.props;
-    dispatch(delExpense(id));
+    const { dispatch, expenses } = this.props;
+    const newArrayExpenses = expenses.filter((element) => element.id !== Number(id));
+    newArrayExpenses.forEach((element, index) => {
+      element.id = index;
+    });
+    dispatch(delExpense(newArrayExpenses));
   };
 
   handleClickEditMode = ({ target: { id } }) => {

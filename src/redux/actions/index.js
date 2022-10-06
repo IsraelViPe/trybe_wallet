@@ -36,9 +36,9 @@ export const loadExchageError = (error) => ({
   error,
 });
 
-export const delExpense = (id) => ({
+export const delExpense = (payload) => ({
   type: DEL_EXPENSE,
-  id,
+  payload,
 });
 
 export const editExpenseMode = (idToEdit, recoverInfos) => ({
