@@ -41,6 +41,7 @@ const wallet = (state = INITIAL_STATE, action) => {
   case DEL_EXPENSE:
     return {
       ...state,
+      editor: false,
       expenses: state.expenses
         .filter((element) => element.id !== Number(action.id)),
     };

@@ -29,6 +29,13 @@ class WalletForm extends Component {
         exchangeRates: expenses[idToEdit].exchangeRates };
       expenses.splice(idToEdit, 1, payload);
       submitEditionAct(expenses);
+      this.setState({
+        value: '',
+        description: '',
+        currency: 'USD',
+        method: 'Dinheiro',
+        tag: 'Alimentação',
+      });
     } else {
       addExpenseProp({ ...this.state }, addExpense);
       this.setState((prevState) => ({
@@ -42,17 +49,17 @@ class WalletForm extends Component {
   };
 
   render() {
-    const { currenciesList, editMode } = this.props;
+    const { currenciesList, editMode, expenses } = this.props;
     const { value, description } = this.state;
     return (
-      <form className="field is-horizontal is-justify-content-space-around">
+      <form className="field is-horizontal  is-justify-content-space-around">
 
         <div className="field">
           <label className="label" htmlFor="value">
             Valor
             <div className="control">
               <input
-                className="input is-link "
+                className={ editMode ? 'input is-danger' : 'input is-link' }
                 onChange={ this.handleChange }
                 id="value"
                 data-testid="value-input"
@@ -68,7 +75,7 @@ class WalletForm extends Component {
           <label className="label" htmlFor="currency">
             Moeda
             <div className="control">
-              <div className="select is-link">
+              <div className={ editMode ? 'select is-danger' : 'select is-link' }>
                 <select
                   onChange={ this.handleChange }
                   id="currency"
@@ -93,7 +100,7 @@ class WalletForm extends Component {
           <label className="label" htmlFor="method">
             Forma de Pagamento
             <div className="control">
-              <div className="select  is-link">
+              <div className={ editMode ? 'select is-danger' : 'select is-link' }>
                 <select
                   onChange={ this.handleChange }
                   id="method"
@@ -112,7 +119,7 @@ class WalletForm extends Component {
           <label className="label" htmlFor="tag">
             Categoria
             <div className="control">
-              <div className="select is-link">
+              <div className={ editMode ? 'select is-danger' : 'select is-link' }>
                 <select
                   onChange={ this.handleChange }
                   id="tag"
@@ -134,7 +141,7 @@ class WalletForm extends Component {
             Descrição
             <div className="control">
               <input
-                className="input is-link"
+                className={ editMode ? 'input is-danger' : 'input is-link' }
                 onChange={ this.handleChange }
                 id="description"
                 data-testid="description-input"
@@ -148,12 +155,13 @@ class WalletForm extends Component {
         <div className="field ">
           <div className="control">
             <button
-              className={ editMode ? 'button is-medium is-info mt-4'
+              className={ editMode && expenses.length ? 'button is-medium is-info mt-4'
                 : 'button is-medium is-success mt-4' }
               onClick={ this.handleClick }
               type="button"
             >
-              { editMode ? 'Editar despesa' : 'Adicionar despesa'}
+              { editMode
+              && expenses.length !== 0 ? 'Editar despesa' : 'Adicionar despesa'}
             </button>
           </div>
         </div>

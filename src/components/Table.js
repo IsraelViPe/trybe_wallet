@@ -18,9 +18,9 @@ class Table extends Component {
   render() {
     const { expenses } = this.props;
     return (
-      <div>
+      <div className="card">
         <table className="table">
-          <thead className="content is-medium ">
+          <thead className="content is-medium is-size-4 ">
             <tr>
               <th className=" has-text-link-dark">Descrição</th>
               <th className=" has-text-link-dark">Tag</th>
