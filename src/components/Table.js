@@ -20,7 +20,7 @@ class Table extends Component {
   };
 
   render() {
-    const { expenses } = this.props;
+    const { expenses, editor, idToEdit } = this.props;
     return (
       <div className="card">
         <table className="table">
@@ -40,7 +40,11 @@ class Table extends Component {
           <tbody className="content is-medium">
             { expenses
               .map(({ currency, description, exchangeRates, id, method, tag, value }) => (
-                <tr key={ id }>
+                <tr
+                  className={ editor && Number(idToEdit) === id
+                && ' card has-background-warning' }
+                  key={ id }
+                >
                   <td>{description}</td>
                   <td>{tag}</td>
                   <td>{method}</td>
@@ -94,6 +98,8 @@ const mapStateToProps = (state) => ({
 });
 
 Table.propTypes = {
+  editor: PropTypes.bool.isRequired,
+  idToEdit: PropTypes.string.isRequired,
   dispatch: PropTypes.func.isRequired,
   expenses: PropTypes.arrayOf(PropTypes.shape({
     currency: PropTypes.string.isRequired,
