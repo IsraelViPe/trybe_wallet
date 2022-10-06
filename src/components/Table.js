@@ -19,21 +19,21 @@ class Table extends Component {
     const { expenses } = this.props;
     return (
       <div>
-        <table>
-          <thead>
+        <table className="table">
+          <thead className="content is-medium ">
             <tr>
-              <th>Descrição</th>
-              <th>Tag</th>
-              <th>Método de pagamento</th>
-              <th>Valor</th>
-              <th>Moeda</th>
-              <th>Câmbio utilizado</th>
-              <th>Valor convertido</th>
-              <th>Moeda de conversão</th>
-              <th>Editar/Excluir</th>
+              <th className=" has-text-link-dark">Descrição</th>
+              <th className=" has-text-link-dark">Tag</th>
+              <th className=" has-text-link-dark">Método de pagamento</th>
+              <th className=" has-text-link-dark">Valor</th>
+              <th className=" has-text-link-dark">Moeda</th>
+              <th className=" has-text-link-dark">Câmbio utilizado</th>
+              <th className=" has-text-link-dark">Valor convertido</th>
+              <th className=" has-text-link-dark">Moeda de conversão</th>
+              <th className=" has-text-link-dark">Editar/Excluir</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="content is-medium">
             { expenses
               .map(({ currency, description, exchangeRates, id, method, tag, value }) => (
                 <tr key={ id }>
@@ -50,22 +50,30 @@ class Table extends Component {
                   </td>
                   <td>Real</td>
                   <td>
-                    <button
-                      onClick={ this.handleClick }
-                      data-testid="delete-btn"
-                      id={ id }
-                      type="button"
-                    >
-                      Excluir
-                    </button>
-                    <button
-                      onClick={ this.handleClickEditMode }
-                      data-testid="edit-btn"
-                      id={ id }
-                      type="button"
-                    >
-                      Editar despesa
-                    </button>
+                    <div className="field has-addons">
+                      <p className="control">
+                        <button
+                          className="button is-danger is-outlined"
+                          onClick={ this.handleClick }
+                          data-testid="delete-btn"
+                          id={ id }
+                          type="button"
+                        >
+                          Excluir
+                        </button>
+                      </p>
+                      <p className="control">
+                        <button
+                          className="button is-info is-outlined"
+                          onClick={ this.handleClickEditMode }
+                          data-testid="edit-btn"
+                          id={ id }
+                          type="button"
+                        >
+                          Editar despesa
+                        </button>
+                      </p>
+                    </div>
 
                   </td>
                 </tr>

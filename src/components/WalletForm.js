@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-max-depth */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -44,87 +45,120 @@ class WalletForm extends Component {
     const { currenciesList, editMode } = this.props;
     const { value, description } = this.state;
     return (
-      <div>
-        <form>
-          <label htmlFor="value">
-            Valor:
-            <input
-              onChange={ this.handleChange }
-              id="value"
-              data-testid="value-input"
-              type="number"
-              name="value"
-              value={ value }
-            />
-          </label>
-          <label htmlFor="currency">
-            Moeda:
-            <select
-              onChange={ this.handleChange }
-              id="currency"
-              data-testid="currency-input"
-              name="currency"
-            >
-              {currenciesList
-                .map((currencie, index) => (
-                  <option
-                    key={ `${index} ${currencie}` }
-                    value={ currencie }
-                  >
-                    {currencie}
+      <form className="field is-horizontal is-justify-content-space-around">
 
-                  </option>
-                ))}
-            </select>
+        <div className="field">
+          <label className="label" htmlFor="value">
+            Valor
+            <div className="control">
+              <input
+                className="input is-link "
+                onChange={ this.handleChange }
+                id="value"
+                data-testid="value-input"
+                type="number"
+                name="value"
+                value={ value }
+              />
+            </div>
           </label>
-          <label htmlFor="method">
+        </div>
+
+        <div className="field">
+          <label className="label" htmlFor="currency">
+            Moeda
+            <div className="control">
+              <div className="select is-link">
+                <select
+                  onChange={ this.handleChange }
+                  id="currency"
+                  data-testid="currency-input"
+                  name="currency"
+                >
+                  {currenciesList
+                    .map((currencie, index) => (
+                      <option
+                        key={ `${index} ${currencie}` }
+                        value={ currencie }
+                      >
+                        {currencie}
+                      </option>
+                    ))}
+                </select>
+              </div>
+            </div>
+          </label>
+        </div>
+        <div className="field">
+          <label className="label" htmlFor="method">
             Forma de Pagamento
-            <select
-              onChange={ this.handleChange }
-              id="method"
-              data-testid="method-input"
-              name="method"
+            <div className="control">
+              <div className="select  is-link">
+                <select
+                  onChange={ this.handleChange }
+                  id="method"
+                  data-testid="method-input"
+                  name="method"
+                >
+                  <option value="Dinheiro">Dinheiro</option>
+                  <option value="Cartão de crédito">Cartão de crédito</option>
+                  <option value="Cartão de débito">Cartão de débito</option>
+                </select>
+              </div>
+            </div>
+          </label>
+        </div>
+        <div className="field">
+          <label className="label" htmlFor="tag">
+            Categoria
+            <div className="control">
+              <div className="select is-link">
+                <select
+                  onChange={ this.handleChange }
+                  id="tag"
+                  data-testid="tag-input"
+                  name="tag"
+                >
+                  <option value="Alimentação">Alimentação</option>
+                  <option value="Lazer">Lazer</option>
+                  <option value="Trabalho">Trabalho</option>
+                  <option value="Transporte">Transporte</option>
+                  <option value="Saúde">Saúde</option>
+                </select>
+              </div>
+            </div>
+          </label>
+        </div>
+        <div className="field">
+          <label className="label" htmlFor="description">
+            Descrição
+            <div className="control">
+              <input
+                className="input is-link"
+                onChange={ this.handleChange }
+                id="description"
+                data-testid="description-input"
+                type="text"
+                name="description"
+                value={ description }
+              />
+            </div>
+          </label>
+        </div>
+        <div className="field ">
+          <div className="control">
+            <button
+              className={ editMode ? 'button is-medium is-info mt-4'
+                : 'button is-medium is-success mt-4' }
+              onClick={ this.handleClick }
+              type="button"
             >
-              <option value="Dinheiro">Dinheiro</option>
-              <option value="Cartão de crédito">Cartão de crédito</option>
-              <option value="Cartão de débito">Cartão de débito</option>
-            </select>
-          </label>
-          <label htmlFor="tag">
-            Tag:
-            <select
-              onChange={ this.handleChange }
-              id="tag"
-              data-testid="tag-input"
-              name="tag"
-            >
-              <option value="Alimentação">Alimentação</option>
-              <option value="Lazer">Lazer</option>
-              <option value="Trabalho">Trabalho</option>
-              <option value="Transporte">Transporte</option>
-              <option value="Saúde">Saúde</option>
-            </select>
-          </label>
-          <label htmlFor="description">
-            Descrição:
-            <input
-              onChange={ this.handleChange }
-              id="description"
-              data-testid="description-input"
-              type="text"
-              name="description"
-              value={ description }
-            />
-          </label>
-          <button
-            onClick={ this.handleClick }
-            type="button"
-          >
-            { editMode ? 'Editar despesa' : 'Adicionar despesa'}
+              { editMode ? 'Editar despesa' : 'Adicionar despesa'}
+            </button>
+          </div>
+        </div>
+      </form>
 
-          </button>
-        </form>
-      </div>
     );
   }
 }

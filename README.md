@@ -1,6 +1,6 @@
 # Boas-vindas ao repositório do projeto Trybewallet!
 
-<p> Projeto desenvolvido no curso de Desenvolvimento Web na [Trybe] (https://www.betrybe.com/) </p>
+ Projeto desenvolvido no curso de Desenvolvimento Web na [Trybe] (https://www.betrybe.com/)
 
 <details>
   <summary><strong>O que foi desenvolvido</strong></summary><br />

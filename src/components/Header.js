@@ -10,21 +10,43 @@ class Header extends Component {
       * Number(expense.exchangeRates[expense.currency].ask) + total), 0);
     const exchange = 'BRL';
     return (
-      <div>
-        <div>
-          <span data-testid="email-field">
-            {`Email: ${globalEmail}`}
-          </span>
-
+      <div className="level pt-6 ">
+        <div className="level-item has-text-centered">
+          <div>
+            <span
+              data-testid="email-field"
+              className="heading
+            is-size-4 is-family-sans-serif"
+            >
+              {`Email: ${globalEmail}`}
+            </span>
+          </div>
         </div>
-        <div>
-          <span>Despesa Total: </span>
-          <span data-testid="total-field">
-            {totalExpenses.toFixed(2)}
-          </span>
-          <span data-testid="header-currency-field">
-            {` ${exchange}`}
-          </span>
+        <div className="level-item has-text-centered">
+          <div>
+            <span
+              className="heading is-size-6 is-family-sans-serif
+              has-text-warning-dark"
+            >
+              Despesa Total
+              {' '}
+
+            </span>
+            <span
+              data-testid="total-field"
+              className="title is-2
+              has-text-grey-dark"
+            >
+              {totalExpenses.toFixed(2)}
+            </span>
+            <span
+              className="subtitle is-4 p-1
+              has-text-grey"
+              data-testid="header-currency-field"
+            >
+              {`${exchange}`}
+            </span>
+          </div>
 
         </div>
       </div>

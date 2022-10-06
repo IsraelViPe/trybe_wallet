@@ -27,35 +27,49 @@ class Login extends React.Component {
     const { emailLocal, passwordLocal } = this.state;
     const emailValidateRegex = /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/;
     const minEnterPassword = 6;
+    const isDisabled = !(emailValidateRegex.test(emailLocal)
+    && passwordLocal.length >= minEnterPassword);
     return (
-      <div>
-        <form
-          onSubmit={ this.handleSubmit }
-        >
-          <input
-            onChange={ this.handleChange }
-            data-testid="email-input"
-            type="email"
-            name="emailLocal"
-            value={ emailLocal }
-            placeholder="E-mail"
-          />
-          <input
-            onChange={ this.handleChange }
-            data-testid="password-input"
-            type="password"
-            name="passwordLocal"
-            value={ passwordLocal }
-            placeholder="Senha"
-          />
-          <button
-            type="submit"
-            disabled={ !(emailValidateRegex.test(emailLocal)
-              && passwordLocal.length >= minEnterPassword) }
+      <div className="container-login">
+        <div className="field">
+          <span className="subtitle is-5 is-family-monospace">Wallet</span>
+          <form
+            className="box"
+            onSubmit={ this.handleSubmit }
           >
-            Entrar
-          </button>
-        </form>
+            <div className="field">
+              <input
+                className="input is-large"
+                onChange={ this.handleChange }
+                data-testid="email-input"
+                type="email"
+                name="emailLocal"
+                value={ emailLocal }
+                placeholder="E-mail"
+              />
+            </div>
+            <div className="field">
+              <input
+                className="input is-large"
+                onChange={ this.handleChange }
+                data-testid="password-input"
+                type="password"
+                name="passwordLocal"
+                value={ passwordLocal }
+                placeholder="Senha"
+              />
+            </div>
+            <div className="field">
+              <button
+                className="button button is-warning is-large is-fullwidth"
+                type="submit"
+                disabled={ isDisabled }
+              >
+                Entrar
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     );
   }
