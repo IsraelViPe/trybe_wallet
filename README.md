@@ -29,3 +29,10 @@ Neste projeto foram aplicadas as seguintes skills:
 
 - Criar _actions_ assíncronas na sua aplicação React que faz uso de Redux.
 </details>
+
+### Deploy
+```
+git clone git@github.com:IsraelViPe/trybe_wallet.git
+npm install
+npm start
+```
