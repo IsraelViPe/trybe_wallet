@@ -27,6 +27,10 @@ Neste projeto foram aplicadas as seguintes skills:
 
 - Criar _actions_ assíncronas na sua aplicação React que faz uso de Redux.
 
+### Principais Tecnologias
+* React / Redux
+* Jest e RLT(React Testing Library)
+* Bulma para estilização
 
 ### Deploy
 ```
